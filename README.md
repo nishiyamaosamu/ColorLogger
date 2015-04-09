@@ -3,6 +3,7 @@ Colorful log for Xcode in Swift project
 
 This library is inspired by [XCGLogger](https://github.com/DaveWoodCom/XCGLogger), [XcodeColors](https://github.com/DaveWoodCom/XCGLogger)
 
+### * Now Xcode6.3 not Available. "Color ESCAPE code" is escaped by Xcode6.3
 
 ### How to use
 
