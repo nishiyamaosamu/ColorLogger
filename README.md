@@ -1,5 +1,5 @@
 # ColorLogger
-Colorful logging for Xcode in swift project
+Colorful log for Xcode in Swift project
 
 This library is inspired by [XCGLogger](https://github.com/DaveWoodCom/XCGLogger), [XcodeColors](https://github.com/DaveWoodCom/XCGLogger)
 
