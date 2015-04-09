@@ -40,8 +40,9 @@ Change some showing setting, default is all true
 
 ```swift
 log.showLogLevel = true
-log.showFileInfo = true
-log.showDate = true
+log.showFileInfo = false
+log.showFunctionName = true
+log.showDate = false
 ```
 
 
