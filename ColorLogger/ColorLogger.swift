@@ -50,12 +50,14 @@ public class ColorLogger {
     public var showDate = true
     public var showLogLevel = true
     public var showFileInfo = true
+    public var showFunctionName = true
     
     public func logln(logMessage: String, logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
         
         if self.isEnabledForLogLevel(logLevel) {
             var LogLevelStr: String = ""
             var FileInfoStr: String = ""
+            var FunctionNameStr: String = ""
             var DateTimeStr: String = ""
             var output: String = ""
             
@@ -65,6 +67,10 @@ public class ColorLogger {
 
             if self.showFileInfo {
                 FileInfoStr = "[" + fileName.lastPathComponent + ":" + String(lineNumber) + "] "
+            }
+            
+            if self.showFunctionName {
+                FunctionNameStr = functionName + " "
             }
 
             if self.showDate {
@@ -89,7 +95,7 @@ public class ColorLogger {
             default:
                 output += LogLevelStr + logMessage + " "
             }
-            output += ColorLogStr.gray(FileInfoStr + DateTimeStr)
+            output += ColorLogStr.gray(FileInfoStr + FunctionNameStr + DateTimeStr)
             
             println(output)
         }
@@ -117,8 +123,6 @@ public class ColorLogger {
     
     struct ColorLogStr {
         static let ESCAPE = "\u{001b}["
-        static let RESET_FG = ESCAPE + "fg;" // Clear any foreground color
-//        static let RESET_BG = ESCAPE + "bg;" // Clear any background color
         static let RESET = ESCAPE + ";"   // Clear any foreground or background color
         
         static func red(str: String) -> String {

@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.showFileInfo = false
         log.showDate = false
         log.showLogLevel = true
+        log.showFunctionName = false
         
         println()
         log.verbose("This is Verbose Log")
@@ -39,9 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         log.outputLogLevel = .Warning
-        log.showFileInfo = true
-        log.showDate = true
         log.showLogLevel = false
+        log.showFileInfo = false
+        log.showFunctionName = true
+        log.showDate = true
         
         println()
         log.verbose("This is Verbose Log") // not active
