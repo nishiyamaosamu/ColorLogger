@@ -86,7 +86,7 @@ public class ColorLogger {
                 output += ColorLogStr.yellow(LogLevelStr + logMessage + " ")
             case .Error:
                 output += ColorLogStr.red(LogLevelStr + logMessage + " ")
-            case .None:
+            default:
                 output += LogLevelStr + logMessage + " "
             }
             output += ColorLogStr.gray(FileInfoStr + DateTimeStr)
