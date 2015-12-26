@@ -159,6 +159,8 @@
 		17AA316C1AD5FF4F0040DB80 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "EVER SENSE, INC";
 				TargetAttributes = {
