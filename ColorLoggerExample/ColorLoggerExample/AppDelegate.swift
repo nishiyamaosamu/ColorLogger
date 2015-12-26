@@ -25,13 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.warning("This is Warning Log")
         log.error("This is Error Log")
         
+        log.debug([1,2,3,4]) // AnyObject
+        let a : NSObject? = nil
+        log.debug(a) //nil
+        log.debug("one", 2, [3,4]) //variadic parameter
+        
+        
         log.outputLogLevel = .Verbose
         log.showFileInfo = false
         log.showDate = false
         log.showLogLevel = true
         log.showFunctionName = false
         
-        println()
+        print("")
         log.verbose("This is Verbose Log")
         log.debug("This is Debug Log")
         log.info("This is Info Log")
@@ -45,12 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         log.showFunctionName = true
         log.showDate = true
         
-        println()
+        print("")
         log.verbose("This is Verbose Log") // not active
         log.debug("This is Debug Log") // not active
         log.info("This is Info Log") // not active
         log.warning("This is Warning Log")
         log.error("This is Error Log")
+        
+        
 
         return true
     }
