@@ -52,21 +52,32 @@ public class ColorLogger {
     public var showFileInfo = true
     public var showFunctionName = true
     
-    public func logln(logMessage: String, logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
+    private func logln(logMessage: [AnyObject?], logLevel: LogLevel, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__) {
         
         if self.isEnabledForLogLevel(logLevel) {
-            var LogLevelStr: String = ""
-            var FileInfoStr: String = ""
-            var FunctionNameStr: String = ""
-            var DateTimeStr: String = ""
-            var output: String = ""
+            var logMessageStr = ""
+            var LogLevelStr = ""
+            var FileInfoStr = ""
+            var FunctionNameStr = ""
+            var DateTimeStr = ""
+            var output = ""
+
+            logMessage.forEach{
+                if $0 == nil {
+                    logMessageStr += "nil"
+                }else{
+                    logMessageStr += $0!.description
+                }
+                logMessageStr += " "
+            }
+            
             
             if self.showLogLevel {
                 LogLevelStr = "[" + logLevel.description() + "] "
             }
 
             if self.showFileInfo {
-                FileInfoStr = "[" + fileName.lastPathComponent + ":" + String(lineNumber) + "] "
+                FileInfoStr = "[" + (fileName as NSString).lastPathComponent + ":" + String(lineNumber) + "] "
             }
             
             if self.showFunctionName {
@@ -76,44 +87,44 @@ public class ColorLogger {
             if self.showDate {
                 let now = NSDate()
                 let dateFormatter = NSDateFormatter()
-                let locale = NSLocale.currentLocale()
                 dateFormatter.dateFormat = self.dateFormatter
                 DateTimeStr = dateFormatter.stringFromDate(now)
             }
             
             switch logLevel {
             case .Verbose:
-                output += ColorLogStr.gray(LogLevelStr + logMessage + " ")
+                output += ColorLogStr.gray(LogLevelStr + logMessageStr)
             case .Debug:
-                output += ColorLogStr.blue(LogLevelStr + logMessage + " ")
+                output += ColorLogStr.blue(LogLevelStr + logMessageStr)
             case .Info:
-                output += ColorLogStr.cyan(LogLevelStr + logMessage + " ")
+                output += ColorLogStr.cyan(LogLevelStr + logMessageStr)
             case .Warning:
-                output += ColorLogStr.yellow(LogLevelStr + logMessage + " ")
+                output += ColorLogStr.yellow(LogLevelStr + logMessageStr)
             case .Error:
-                output += ColorLogStr.red(LogLevelStr + logMessage + " ")
+                output += ColorLogStr.red(LogLevelStr + logMessageStr)
             default:
-                output += LogLevelStr + logMessage + " "
+                output += LogLevelStr + logMessageStr
             }
             output += ColorLogStr.gray(FileInfoStr + FunctionNameStr + DateTimeStr)
             
-            println(output)
+            print(output)
         }
     }
     
-    public func verbose(logMessage: String, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__){
+    public func verbose(logMessage: AnyObject?..., functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__){
+        
         self.logln(logMessage, logLevel: .Verbose, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
-    public func info(logMessage: String, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__){
+    public func info(logMessage: AnyObject?..., functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__){
         self.logln(logMessage, logLevel: .Info, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
-    public func debug(logMessage: String, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__){
+    public func debug(logMessage: AnyObject?..., functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__){
         self.logln(logMessage, logLevel: .Debug, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
-    public func warning(logMessage: String, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__){
+    public func warning(logMessage: AnyObject?..., functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__){
         self.logln(logMessage, logLevel: .Warning, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
-    public func error(logMessage: String, functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__){
+    public func error(logMessage: AnyObject?..., functionName: String = __FUNCTION__, fileName: String = __FILE__, lineNumber: Int = __LINE__){
         self.logln(logMessage, logLevel: .Error, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     }
     
